@@ -25,25 +25,46 @@ public class Vliegenmepper extends Actor
      */
     public void act() 
     {
-        if ( isTouching(Fly.class) ) 
+        /*if ( isTouching(Fly.class) ) 
         {
-            removeTouching(Fly.class);
-            Greenfoot.playSound("Clap.mp3");
-            setImage(image2);   
-            // pauze voor de tekening te laten staan
-            if(pauze!=0)
-            {
-                pauze=0;
-            }
-            if(pauze<10000)
-            {
-                pauze++;
-            }            
+        removeTouching(Fly.class);
+        Greenfoot.playSound("Clap.mp3");
+        setImage(image2);     
         }
         else 
         {
+        setImage(image1);
+        }
+         */
+        if (Greenfoot.isKeyDown("left"))
+        {
+            turn(-20);
+        }
+        if (Greenfoot.isKeyDown("right"))
+        {
+            turn(20);
+        }
+        if (Greenfoot.isKeyDown("up"))
+        {
+            move(-5);
+        }
+        if (Greenfoot.isKeyDown("down"))
+        {
+            move(5);
+        }  
+        if (Greenfoot.isKeyDown("space"))
+        {
+            setImage(image2);
+            if ( isTouching(Fly.class))
+            {
+                removeTouching(Fly.class);
+                Greenfoot.playSound("Clap.mp3");   
+            }
+        }
+        else
+        {
             setImage(image1);
         }
-        
+            
     }    
 }
