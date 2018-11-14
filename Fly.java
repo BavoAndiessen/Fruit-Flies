@@ -9,14 +9,17 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Fly extends Actor
 {
     boolean male;
+    int speed = 8;
     private GreenfootImage map;
     public void act() {
         
-        move(8);
+        
+        move(speed);
         if (atWorldsEnd()) {
             setRotation(Greenfoot.getRandomNumber(360));
         } else if (atWall()) {
             setRotation(Greenfoot.getRandomNumber(360));
+            
         }
     }   
     
@@ -47,6 +50,8 @@ public class Fly extends Actor
     public boolean atWall() {
         Color color = map.getColorAt(this.getX(), this.getY());
         
+        speed = 8;
+        
         int red = color.getRed();
         int green = color.getGreen();
         int blue = color.getBlue();
@@ -54,10 +59,11 @@ public class Fly extends Actor
         return (red == 128 && green == 128 && blue == 128);
     }
     
-    public void stop() {
-        Greenfoot.setSpeed(0);
+    public void stop(){
+        speed = 0;
     }
+    
     public void start() {
-        Greenfoot.setSpeed(8);
+        speed = 8;
     }
 }
