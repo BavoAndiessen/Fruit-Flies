@@ -35,7 +35,6 @@ public class MyWorld extends World
                 	addObject(fly,30,74);
                 	i++; 
             	}
-            	//test
                 
             } 
         }
