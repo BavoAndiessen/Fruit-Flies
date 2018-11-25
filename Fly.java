@@ -17,7 +17,7 @@ public class Fly extends Creature
         move(speed);
         if (atWorldsEnd()) {
             setRotation(Greenfoot.getRandomNumber(360));
-        } else if (atColor("gray")) {
+        } else if (atColor(Colors.GRAY)) {
             int currentRotation = getRotation();
             int randomAngle = Greenfoot.getRandomNumber(180);
             setRotation(currentRotation + randomAngle);
@@ -60,9 +60,12 @@ public class Fly extends Creature
         } else if (getX() > 1078) {
             setRotation(getRotation() + 90 + Greenfoot.getRandomNumber(180));
         }
+        if (getY() < 33) {
+            setRotation(80 + Greenfoot.getRandomNumber(20));
+        }
     }
     
-    public boolean atColor(String colorToLookFor) {
+    public boolean atColor(Colors colorToLookFor) {
         
         Color currentColor = map.getColorAt(this.getX(), this.getY());
         
@@ -71,11 +74,15 @@ public class Fly extends Creature
         int red = currentColor.getRed();
         int green = currentColor.getGreen();
         int blue = currentColor.getBlue();
-        if (colorToLookFor == "gray") {
-            return (red == 128 && green == 128 && blue == 128);
-        } else {
-            return false;
+        
+        switch (colorToLookFor) {
+           case GRAY:
+                return (red == 128 && green == 128 && blue == 128);  
+           default:
+                return false;
+                
         }
+
         
     }
     
@@ -87,3 +94,17 @@ public class Fly extends Creature
         speed = 8;
     }
 }
+
+
+
+enum Colors {
+    GRAY,
+    // possible extra colors for detecting fruit:
+    
+    BlUE,
+    RED,
+    YELLOW,
+    GREEN,
+    
+}
+
