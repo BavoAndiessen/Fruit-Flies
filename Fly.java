@@ -6,22 +6,28 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Fly extends Actor
+public class Fly extends Creature
 {
     boolean male;
     int speed = 8;
-    private GreenfootImage map;
+    
     public void act() {
         
         
         move(speed);
         if (atWorldsEnd()) {
             setRotation(Greenfoot.getRandomNumber(360));
-        } else if (atWall()) {
-            setRotation(Greenfoot.getRandomNumber(360));
+        } else if (atColor("gray")) {
+            int currentRotation = getRotation();
+            int randomAngle = Greenfoot.getRandomNumber(180);
+            setRotation(currentRotation + randomAngle);
             
         }
+        
+        checkWindows();
     }   
+    
+    
     
     
     public boolean atWorldsEnd() {
@@ -36,6 +42,7 @@ public class Fly extends Actor
     }
     
     public Fly(boolean male) {
+        
         map = new GreenfootImage("grondplan.PNG");
         setRotation(Greenfoot.getRandomNumber(360));
         
@@ -47,19 +54,32 @@ public class Fly extends Actor
         }
     }
     
-    public boolean atWall() {
-        Color color = map.getColorAt(this.getX(), this.getY());
+    public void checkWindows() {
+        if (getX() > 1100) {
+            setRotation(170 + Greenfoot.getRandomNumber(20));
+        } else if (getX() > 1078) {
+            setRotation(getRotation() + 90 + Greenfoot.getRandomNumber(180));
+        }
+    }
+    
+    public boolean atColor(String colorToLookFor) {
+        
+        Color currentColor = map.getColorAt(this.getX(), this.getY());
         
         speed = 8;
         
-        int red = color.getRed();
-        int green = color.getGreen();
-        int blue = color.getBlue();
-
-        return (red == 128 && green == 128 && blue == 128);
+        int red = currentColor.getRed();
+        int green = currentColor.getGreen();
+        int blue = currentColor.getBlue();
+        if (colorToLookFor == "gray") {
+            return (red == 128 && green == 128 && blue == 128);
+        } else {
+            return false;
+        }
+        
     }
     
-    public void stop(){
+    public void stop() {
         speed = 0;
     }
     
