@@ -55,13 +55,21 @@ public class Fly extends Creature
     }
     
     public void checkWindows() {
+        
+        int lessThan20 = Greenfoot.getRandomNumber(20);
+        
+        // FIXME: opkuisen
+        // FIXME: raar gedrag heel de tijd op een neer gaan tussen muren  
         if (getX() > 1100) {
-            setRotation(170 + Greenfoot.getRandomNumber(20));
+            setRotation(170 + lessThan20);
         } else if (getX() > 1078) {
             setRotation(getRotation() + 90 + Greenfoot.getRandomNumber(180));
         }
         if (getY() < 33) {
-            setRotation(80 + Greenfoot.getRandomNumber(20));
+            setRotation(80 + lessThan20);
+        } 
+        if (getY() > 575) {
+            setRotation(260 + lessThan20);
         }
     }
     
