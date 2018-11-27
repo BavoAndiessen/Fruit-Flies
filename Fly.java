@@ -17,7 +17,7 @@ public class Fly extends Creature
         move(speed);
         if (atWorldsEnd()) {
             setRotation(Greenfoot.getRandomNumber(360));
-        } else if (atColor(Colors.GRAY)) {
+        } else if (atColor(Colors.GRAY_WALL)) {
             int currentRotation = getRotation();
             int randomAngle = Greenfoot.getRandomNumber(180);
             setRotation(currentRotation + randomAngle);
@@ -26,20 +26,6 @@ public class Fly extends Creature
         
         checkWindows();
     }   
-    
-    
-    
-    
-    public boolean atWorldsEnd() {
-        if (getX() < 3 || getX() > getWorld().getWidth() - 3) {
-            return true;
-        }
-        if (getY() < 3 || getY() > getWorld().getHeight() - 3) {
-            return true;
-        } else {
-            return false;
-        }
-    }
     
     public Fly(boolean male) {
         
@@ -54,22 +40,34 @@ public class Fly extends Creature
         }
     }
     
+    public boolean atWorldsEnd() {
+        if (getX() < 3 || getX() > getWorld().getWidth() - 3) {
+            return true;
+        }
+        if (getY() < 3 || getY() > getWorld().getHeight() - 3) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    // Vragen aan mevr. Brouns wat hier de beste werkwijze is
     public void checkWindows() {
         
-        int lessThan20 = Greenfoot.getRandomNumber(20);
+        int additionalAngle = Greenfoot.getRandomNumber(180);
         
-        // FIXME: opkuisen
-        // FIXME: raar gedrag heel de tijd op een neer gaan tussen muren  
+        // FIXME: opkuisen  
+        
         if (getX() > 1100) {
-            setRotation(170 + lessThan20);
+            setRotation(170 + additionalAngle);
         } else if (getX() > 1078) {
-            setRotation(getRotation() + 90 + Greenfoot.getRandomNumber(180));
+            setRotation(getRotation() + 90 + additionalAngle);
         }
         if (getY() < 33) {
-            setRotation(80 + lessThan20);
+            setRotation(additionalAngle);
         } 
         if (getY() > 575) {
-            setRotation(260 + lessThan20);
+            setRotation(-additionalAngle);
         }
     }
     
@@ -84,13 +82,12 @@ public class Fly extends Creature
         int blue = currentColor.getBlue();
         
         switch (colorToLookFor) {
-           case GRAY:
-                return (red == 128 && green == 128 && blue == 128);  
+           case GRAY_WALL:
+                return (red == 128 && green == 128 && blue == 128);
            default:
                 return false;
                 
         }
-
         
     }
     
@@ -106,8 +103,8 @@ public class Fly extends Creature
 
 
 enum Colors {
-    GRAY,
-    // possible extra colors for detecting fruit:
+    GRAY_WALL,
+    // possible other colors for detecting fruit:
     
     BlUE,
     RED,
