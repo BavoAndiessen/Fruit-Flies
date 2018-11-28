@@ -21,9 +21,9 @@ public class MyWorld extends World
         setBackground(grondplan); 
         
         addObject (FlyDisplay,500, 600);
-        addObject (Scorebord,500, 620);
-        addObject (Level, 500, 640);
-        addObject (FruitDisplay, 500, 660);
+        addObject (Scorebord,499, 620);
+        addObject (Level, 502, 640);
+        addObject (FruitDisplay, 503, 660);
         
         Vliegenmepper Vliegenmepper = new Vliegenmepper();
         addObject (Vliegenmepper, 100, 100);
