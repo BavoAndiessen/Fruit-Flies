@@ -1,0 +1,15 @@
+#BlueJ class context
+comment0.target=Spray
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Spray\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=
+comment1.target=Spray()
+comment2.params=
+comment2.target=void\ act()
+comment2.text=\r\n\ Act\ -\ do\ whatever\ the\ Spray\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
+comment3.params=
+comment3.target=void\ sprayTime()
+comment3.text=\r\n\ Set\ images\ to\ generate\ a\ spraying\ motion\ which\ kills\ the\ flies.\r\n\ \r\n
+comment4.params=
+comment4.target=void\ exterminateFly()
+comment4.text=\r\n\ Exterminates\ the\ fly\ when\ the\ fly\ touches\ to\ spray.\r\n
+numComments=5
