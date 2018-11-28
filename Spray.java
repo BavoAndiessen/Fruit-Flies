@@ -29,7 +29,7 @@ public class Spray extends Actor
     {
         Timer++;    
         sprayTime();
-        if (Timer > 5*MyWorld.lvl+500)
+        if (Timer > 10*MyWorld.lvl+500)
         {
             exterminateFly();
         }
@@ -39,16 +39,16 @@ public class Spray extends Actor
      * 
      */
         public void sprayTime(){
-        if (Timer == 5*MyWorld.lvl+500)
+        if (Timer == 10*MyWorld.lvl+500)
         {
             Greenfoot.playSound("Spray.mp3");
             setImage(image2);
         }
-        if (Timer == 5*MyWorld.lvl+530)
+        if (Timer == 10*MyWorld.lvl+530)
         {
             setImage(image3);
         }
-        if (Timer == 5*MyWorld.lvl+830)
+        if (Timer == 10*MyWorld.lvl+830)
         {
             setImage(image1);
             Timer = 0;
