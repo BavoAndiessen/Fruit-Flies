@@ -11,6 +11,7 @@ public class MyWorld extends World
     Label FlyDisplay = new Label("Aantal vliegen: 0");
     Label Scorebord = new Label("Score: 0");
     Label Level = new Label("Level: 1");
+    Label FruitDisplay = new Label("Fruit: 0");
     
     public MyWorld()
     {    
@@ -22,9 +23,13 @@ public class MyWorld extends World
         addObject (FlyDisplay,500, 600);
         addObject (Scorebord,500, 620);
         addObject (Level, 500, 640);
+        addObject (FruitDisplay, 500, 660);
         
         Vliegenmepper Vliegenmepper = new Vliegenmepper();
         addObject (Vliegenmepper, 100, 100);
+        
+        Spray Spray = new Spray();
+        addObject(Spray, 930, 80);
 
         act();
     }
@@ -40,14 +45,41 @@ public class MyWorld extends World
     {
         int kansNewFruit = Greenfoot.getRandomNumber(10000);
           
-          if (kansNewFruit < 10 && FruitCount < 2)
+          if (kansNewFruit < 10 && FruitCount < 4)
           {
               int fruitsoort = Greenfoot.getRandomNumber(6);
               
               if (fruitsoort == 1)
               {
-                  
+                  Aardbei Aardbei = new Aardbei();
+                  addObject (Aardbei, Greenfoot.getRandomNumber(1000), Greenfoot.getRandomNumber(600));
               }
+              
+              if (fruitsoort == 2)
+              {
+                  Appel Appel = new Appel();
+                  addObject (Appel, Greenfoot.getRandomNumber(1000), Greenfoot.getRandomNumber(600));
+              }
+              
+              if (fruitsoort == 3)
+              {
+                  Banaan Banaan = new Banaan();
+                  addObject (Banaan, Greenfoot.getRandomNumber(1000), Greenfoot.getRandomNumber(600));
+              }
+              
+              if (fruitsoort == 4)
+              {
+                  Kers Kers = new Kers();
+                  addObject (Kers, Greenfoot.getRandomNumber(1000), Greenfoot.getRandomNumber(600));
+              }
+              
+              if (fruitsoort == 5)
+              {
+                  Peer Peer = new Peer();
+                  addObject (Peer, Greenfoot.getRandomNumber(1000), Greenfoot.getRandomNumber(600));
+              }
+              
+              FruitCount++;
               
               //if statement voor elke fruitsoort net zoals bij de vliegen
           }
@@ -58,6 +90,7 @@ public class MyWorld extends World
         FlyDisplay.setText("Aantal vliegen: "+ FlyCountDisplay);
         Scorebord.setText("Score: " + Score); //+ score vanuit Spray/mepper klasse
         Level.setText("Level: " + lvl);
+        FruitDisplay.setText("Fruit: " + FruitCount);
         
         FlyCountDisplay = FlyCount - Score;
           
