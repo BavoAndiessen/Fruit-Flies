@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Fly extends Creature
 {
     boolean male;
-    int speed = 8;
+    int speed = 8; // + MyWorld.lvl*3 (telt het level maal 3 op bij de snelheid van de vlieg)
     
     public void act() {
         
