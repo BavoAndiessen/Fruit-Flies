@@ -34,20 +34,32 @@ public class Spray extends Actor
      * Set images to generate a spraying motion which kills the flies.
      * 
      */
-    public void sprayTime(){
+        public void sprayTime(){
         if (Timer == 500)
         {
             Greenfoot.playSound("Spray.mp3");
             setImage(image2);
+            exterminateFly();
         }
         if (Timer == 530)
         {
             setImage(image3);
+            exterminateFly();
         }
         if (Timer == 830)
         {
             setImage(image1);
             Timer = 0;
+        }
+}
+    /**
+     * Exterminates the fly when the fly touches to spray.
+     */
+       public void exterminateFly(){
+        if (isTouching(Fly.class))
+        {
+            removeTouching(Fly.class);
+            MyWorld.Score++;
         }
 }
 }
