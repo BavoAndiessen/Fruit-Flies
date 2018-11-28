@@ -11,7 +11,7 @@ public class Aardbei extends Fruit
     private GreenfootImage aardbei;
     private GreenfootImage aardbeif1;
     private GreenfootImage aardbeif2;
-    public int Timer = 0;
+    public int levensduur = 300;
     public Aardbei() 
     {
         aardbei = new GreenfootImage("aardbei_transparant.png");
@@ -21,28 +21,15 @@ public class Aardbei extends Fruit
     }  
     public void act()
     {
-        Timer ++;
         if ( getOneIntersectingObject(Fly.class) != null )
         {
+            
             Fly fly = (Fly) getOneIntersectingObject(Fly.class);
             fly.stop();
-        if (Timer == 50)
+        if (timer(levensduur) == 50)
             fly.start();
         }
+        getWorld().removeObject(this);
     }
-    public void Timer()
-    {
-        if (Timer == 250)
-        { 
-            setImage (aardbei);
-        }
-        if (Timer == 300)
-        {
-            setImage (aardbeif1);
-        }
-        if (Timer == 350)
-        {
-            setImage (aardbeif2);
-        }
-    }  
+    
 }
