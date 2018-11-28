@@ -19,24 +19,38 @@ public class Appel extends Fruit
     public Appel() 
     {
         appel = new GreenfootImage("appel_transparant.png");
+        appel.scale(112,90);
         appelf1 = new GreenfootImage("appel_transparant 1.png");
+        appelf1.scale(112,90);
         appelf2 = new GreenfootImage("appel_transparant 2.png");
+        appelf2.scale(112,90);
+        setImage (appel);
         // Add your action code here.
     }   
+
     public void act()
     {
-        Timer ++;
-        if (Timer == 250)
-        { 
-            setImage (appel);
-        }
-        if (Timer == 300)
+        Fly fly = (Fly) getOneIntersectingObject(Fly.class);
+        if (fly != null)
         {
-            setImage (appelf1);
-        }
-        if (Timer == 350)
-        {
-            setImage (appelf2);
+            fly.stop();
+            Timer ++;
+            if (Timer == 1)
+            { 
+                setImage (appel);
+            }
+            if (Timer == 400)
+            {
+                setImage (appelf1);
+            }
+            if (Timer == 600)
+            {
+                setImage (appelf2);
+            }
+            if (Timer == 650)
+            {
+                getWorld().removeObject(this);
+            }
         }
     }   
 }
