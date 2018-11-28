@@ -26,17 +26,7 @@ public class Vliegenmepper extends Actor
     public void act() 
     {
         String key = Greenfoot.getKey(); 
-        /*if ( isTouching(Fly.class) ) 
-        {
-        removeTouching(Fly.class);
-        Greenfoot.playSound("Clap.mp3");
-        setImage(image2);     
-        }
-        else 
-        {
-        setImage(image1);
-        }
-         */
+        
         if (Greenfoot.isKeyDown("left"))
         {
             turn(-20);
@@ -71,7 +61,7 @@ public class Vliegenmepper extends Actor
         if ( isTouching(Fly.class))
         {
             removeTouching(Fly.class);  
-            //MyWorld.Score++;
+            MyWorld.Score++;
         }
     }
 }
