@@ -6,39 +6,23 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Fly extends Creature
+public class Fly extends Actor
 {
     boolean male;
     int speed = 8;
-    
+    private GreenfootImage map;
     public void act() {
         
         
         move(speed);
         if (atWorldsEnd()) {
             setRotation(Greenfoot.getRandomNumber(360));
-        } else if (atColor(Colors.GRAY_WALL)) {
-            int currentRotation = getRotation();
-            int randomAngle = Greenfoot.getRandomNumber(180);
-            setRotation(currentRotation + randomAngle);
+        } else if (atWall()) {
+            setRotation(Greenfoot.getRandomNumber(360));
             
         }
-        
-        checkWindows();
     }   
     
-    public Fly(boolean male) {
-        
-        map = new GreenfootImage("grondplan.PNG");
-        setRotation(Greenfoot.getRandomNumber(360));
-        
-        // determine gender
-        if (male) {
-            setImage("maleFly25.png");
-        } else {
-            setImage("femaleFly35.png");
-        }
-    }
     
     public boolean atWorldsEnd() {
         if (getX() < 3 || getX() > getWorld().getWidth() - 3) {
@@ -51,47 +35,31 @@ public class Fly extends Creature
         }
     }
     
-    // Vragen aan mevr. Brouns wat hier de beste werkwijze is
-    public void checkWindows() {
+    public Fly(boolean male) {
+        map = new GreenfootImage("grondplan.PNG");
+        setRotation(Greenfoot.getRandomNumber(360));
         
-        int additionalAngle = Greenfoot.getRandomNumber(180);
-        
-        // FIXME: opkuisen  
-        
-        if (getX() > 1100) {
-            setRotation(170 + additionalAngle);
-        } else if (getX() > 1078) {
-            setRotation(getRotation() + 90 + additionalAngle);
-        }
-        if (getY() < 33) {
-            setRotation(additionalAngle);
-        } 
-        if (getY() > 575) {
-            setRotation(-additionalAngle);
+        // determine gender
+        if (male) {
+            setImage("maleFly25.png");
+        } else {
+            setImage("femaleFly35.png");
         }
     }
     
-    public boolean atColor(Colors colorToLookFor) {
-        
-        Color currentColor = map.getColorAt(this.getX(), this.getY());
+    public boolean atWall() {
+        Color color = map.getColorAt(this.getX(), this.getY());
         
         speed = 8;
         
-        int red = currentColor.getRed();
-        int green = currentColor.getGreen();
-        int blue = currentColor.getBlue();
-        
-        switch (colorToLookFor) {
-           case GRAY_WALL:
-                return (red == 128 && green == 128 && blue == 128);
-           default:
-                return false;
-                
-        }
-        
+        int red = color.getRed();
+        int green = color.getGreen();
+        int blue = color.getBlue();
+
+        return (red == 128 && green == 128 && blue == 128);
     }
     
-    public void stop() {
+    public void stop(){
         speed = 0;
     }
     
@@ -99,17 +67,3 @@ public class Fly extends Creature
         speed = 8;
     }
 }
-
-
-
-enum Colors {
-    GRAY_WALL,
-    // possible other colors for detecting fruit:
-    
-    BlUE,
-    RED,
-    YELLOW,
-    GREEN,
-    
-}
-
