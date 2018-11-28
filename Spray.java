@@ -14,8 +14,11 @@ public class Spray extends Actor
     public Spray()
     {
         image1 = new GreenfootImage("Spray_idle.png");
+        image1.scale(111,76);
         image2 = new GreenfootImage("Spray_stage1.png");
+        image1.scale(111,76);
         image3 = new GreenfootImage("Spray_stage2.png");
+        image1.scale(111,76);
         setImage(image1);
     }
     /**
