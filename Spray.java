@@ -29,6 +29,10 @@ public class Spray extends Actor
     {
         Timer++;    
         sprayTime();
+        if (Timer > 500)
+        {
+            exterminateFly();
+        }
     }   
     /**
      * Set images to generate a spraying motion which kills the flies.
@@ -39,12 +43,10 @@ public class Spray extends Actor
         {
             Greenfoot.playSound("Spray.mp3");
             setImage(image2);
-            exterminateFly();
         }
         if (Timer == 530)
         {
             setImage(image3);
-            exterminateFly();
         }
         if (Timer == 830)
         {
