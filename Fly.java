@@ -13,7 +13,7 @@ public class Fly extends Creature
     
     public void act() {
         
-        
+        checkWindows();
         move(speed);
         if (atWorldsEnd()) {
             setRotation(Greenfoot.getRandomNumber(360));
@@ -23,8 +23,6 @@ public class Fly extends Creature
             setRotation(currentRotation + randomAngle);
             
         }
-        
-        checkWindows();
     }   
     
     public Fly(boolean male) {
