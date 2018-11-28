@@ -11,6 +11,10 @@ public class Fly extends Creature
     boolean male;
     int speed = 8; // + MyWorld.lvl*3 (telt het level maal 3 op bij de snelheid van de vlieg)
     
+    final int RECHTERMUUR = 1078;
+    final int BOVENMUUR = 33;
+    final int ONDERMUUR = 575;
+    
     public void act() {
         
         checkWindows();
@@ -56,13 +60,13 @@ public class Fly extends Creature
         
         // FIXME: opkuisen  
         
-        if (getX() > 1078) {
+        if (getX() > RECHTERMUUR) {
             setRotation(90 + additionalAngle);
         }
-        if (getY() < 33) {
+        if (getY() < BOVENMUUR) {
             setRotation(additionalAngle);
         } 
-        if (getY() > 575) {
+        if (getY() > ONDERMUUR) {
             setRotation(-additionalAngle);
         }
     }
@@ -100,7 +104,7 @@ public class Fly extends Creature
 
 enum Colors {
     GRAY_WALL,
-    // possible other colors for detecting fruit:
+    // possible other colors for detecting fruit in the future
     
     BlUE,
     RED,
