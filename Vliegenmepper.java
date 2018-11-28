@@ -11,12 +11,12 @@ public class Vliegenmepper extends Actor
     private GreenfootImage image1;
     private GreenfootImage image2;
     public int pauze = 0;
+
     public Vliegenmepper()
     {
         image1 = new GreenfootImage("vliegenmepper.png");
         image2 = new GreenfootImage("vliegenmepper2.png");
         setImage(image1);
-
     }
 
     /**
@@ -25,6 +25,7 @@ public class Vliegenmepper extends Actor
      */
     public void act() 
     {
+        String key = Greenfoot.getKey(); 
         /*if ( isTouching(Fly.class) ) 
         {
         removeTouching(Fly.class);
@@ -52,19 +53,25 @@ public class Vliegenmepper extends Actor
         {
             move(5);
         }  
-        if (Greenfoot.isKeyDown("space"))
+        if ((key != null && key.equals("space")))
         {
             setImage(image2);
-            if ( isTouching(Fly.class))
-            {
-                removeTouching(Fly.class);
-                Greenfoot.playSound("Clap.mp3");   
-            }
+            Greenfoot.playSound("Clap.mp3");
+            Kill();
         }
         else
         {
-            setImage(image1);
+            setImage(image1);            
         }
-            
-    }    
+
+    }  
+
+    public void Kill()
+    {
+        if ( isTouching(Fly.class))
+        {
+            removeTouching(Fly.class);  
+            //MyWorld.Score++;
+        }
+    }
 }
