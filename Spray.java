@@ -34,6 +34,7 @@ public class Spray extends Actor
     public void sprayTime(){
         if (Timer == 500)
         {
+            Greenfoot.playSound("Spray.mp3");
             setImage(image2);
         }
         if (Timer == 530)
