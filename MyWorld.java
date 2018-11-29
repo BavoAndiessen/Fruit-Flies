@@ -43,42 +43,38 @@ public class MyWorld extends World
         
     public void spawnFruit()
     {
-        int kansNewFruit = Greenfoot.getRandomNumber(10000);
+        int kansNewFruit = Greenfoot.getRandomNumber(5000);
           
           if (kansNewFruit < 10 && FruitCount < 4)
           {
               int fruitsoort = Greenfoot.getRandomNumber(6);
               
-              if (fruitsoort == 1)
-              {
-                  Aardbei Aardbei = new Aardbei();
-                  addObject (Aardbei, Greenfoot.getRandomNumber(1000), Greenfoot.getRandomNumber(600));
+                  int[] fruitSpawnX = {500, 650, 400, 200, 700};
+                  int[] fruitSpawnY = {150, 230, 330, 340, 400};
+                  int i = Greenfoot.getRandomNumber(5);
+
+              switch (fruitsoort) {
+              	case 1:
+              		Aardbei Aardbei = new Aardbei();
+                  	addObject (Aardbei, fruitSpawnX[i], fruitSpawnY[i]);
+
+                 case 2:
+                 	Appel Appel = new Appel();
+                  	addObject (Appel, fruitSpawnX[i], fruitSpawnY[i]);
+
+                 case 3:
+                 	Banaan Banaan = new Banaan();
+                  	addObject (Banaan, fruitSpawnX[i], fruitSpawnY[i]);
+
+                 case 4:
+                 	Kers Kers = new Kers();
+                  	addObject (Kers, fruitSpawnX[i], fruitSpawnY[i]);
+
+                 case 5:
+                 	Peer Peer = new Peer();
+                  	addObject (Peer, fruitSpawnX[i], fruitSpawnY[i]);
               }
-              
-              if (fruitsoort == 2)
-              {
-                  Appel Appel = new Appel();
-                  addObject (Appel, Greenfoot.getRandomNumber(1000), Greenfoot.getRandomNumber(600));
-              }
-              
-              if (fruitsoort == 3)
-              {
-                  Banaan Banaan = new Banaan();
-                  addObject (Banaan, Greenfoot.getRandomNumber(1000), Greenfoot.getRandomNumber(600));
-              }
-              
-              if (fruitsoort == 4)
-              {
-                  Kers Kers = new Kers();
-                  addObject (Kers, Greenfoot.getRandomNumber(1000), Greenfoot.getRandomNumber(600));
-              }
-              
-              if (fruitsoort == 5)
-              {
-                  Peer Peer = new Peer();
-                  addObject (Peer, Greenfoot.getRandomNumber(1000), Greenfoot.getRandomNumber(600));
-              }
-              
+                            
               FruitCount++;
               
               //if statement voor elke fruitsoort net zoals bij de vliegen
