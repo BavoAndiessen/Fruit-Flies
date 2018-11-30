@@ -18,11 +18,11 @@ public class Banaan extends Fruit
     public int Timer = 0;
     public Banaan() 
     {
-        banaan = new GreenfootImage("banaan_transparant.png");
+        banaan = new GreenfootImage("bannaan_transparant.png");
         banaan.scale(112,90);
-        banaanf1 = new GreenfootImage("banaan_transparant 1.png");
+        banaanf1 = new GreenfootImage("bannaan_transparant 1.png");
         banaanf1.scale(112,90);
-        banaanf2 = new GreenfootImage("banaan_transparant 2.png");
+        banaanf2 = new GreenfootImage("bannaan_transparant 2.png");
         banaanf2.scale(112,90);
         setImage (banaan);
         // Add your action code here.
