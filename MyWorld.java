@@ -49,9 +49,9 @@ public class MyWorld extends World
           {
               int fruitsoort = Greenfoot.getRandomNumber(6);
               
-                  int[] fruitSpawnX = {500, 650, 400, 200, 700};
-                  int[] fruitSpawnY = {150, 230, 330, 340, 400};
-                  int i = Greenfoot.getRandomNumber(5);
+                  int[] fruitSpawnX = {550, 440, 850, 920, 190, 1020, 190}; //vooraf bepaalde coördinaten van logische 'fruitplaatsen'
+                  int[] fruitSpawnY = {230, 380, 500, 440, 350, 420, 120};
+                  int i = Greenfoot.getRandomNumber(6);
 
               switch (fruitsoort) {
               	case 1:
