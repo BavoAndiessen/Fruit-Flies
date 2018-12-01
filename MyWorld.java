@@ -51,28 +51,27 @@ public class MyWorld extends World
               
                   int[] fruitSpawnX = {550, 440, 850, 920, 190, 1020, 190}; //vooraf bepaalde coördinaten van logische 'fruitplaatsen'
                   int[] fruitSpawnY = {230, 380, 500, 440, 350, 420, 120};
-                  int i = Greenfoot.getRandomNumber(6);
 
               switch (fruitsoort) {
-              	case 1:
+              	 case 1:
               		Aardbei Aardbei = new Aardbei();
-                  	addObject (Aardbei, fruitSpawnX[i], fruitSpawnY[i]);
+                  	addObject (Aardbei, fruitSpawnX[FruitCount], fruitSpawnY[FruitCount]);
 
                  case 2:
                  	Appel Appel = new Appel();
-                  	addObject (Appel, fruitSpawnX[i], fruitSpawnY[i]);
+                  	addObject (Appel, fruitSpawnX[FruitCount], fruitSpawnY[FruitCount]);
 
                  case 3:
                  	Banaan Banaan = new Banaan();
-                  	addObject (Banaan, fruitSpawnX[i], fruitSpawnY[i]);
+                  	addObject (Banaan, fruitSpawnX[FruitCount], fruitSpawnY[FruitCount]);
 
                  case 4:
                  	Kers Kers = new Kers();
-                  	addObject (Kers, fruitSpawnX[i], fruitSpawnY[i]);
+                  	addObject (Kers, fruitSpawnX[FruitCount], fruitSpawnY[FruitCount]);
 
                  case 5:
                  	Peer Peer = new Peer();
-                  	addObject (Peer, fruitSpawnX[i], fruitSpawnY[i]);
+                  	addObject (Peer, fruitSpawnX[FruitCount], fruitSpawnY[FruitCount]);
               }
                             
               FruitCount++;
