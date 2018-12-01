@@ -27,6 +27,7 @@ public class Fly extends Creature
             setRotation(currentRotation + randomAngle);
 
         }
+        
     }   
 
     public Fly(boolean male) {
@@ -57,44 +58,30 @@ public class Fly extends Creature
     public void checkWindows() {
 
         int additionalAngle = Greenfoot.getRandomNumber(180);
+        int x = getX();
+        int y = getY();
+        
 
-        // FIXME: opkuisen  
-
-        if (getX() > RECHTERMUUR) {
+        if (x > RECHTERMUUR) {
             setRotation(90 + additionalAngle);
-        }
-        if (getY() < BOVENMUUR) {
+        } else if (y < BOVENMUUR) {
             setRotation(additionalAngle);
-        } 
-        if (getY() > ONDERMUUR) {
+        } else if (y > ONDERMUUR) {
             setRotation(-additionalAngle);
-        }
-        if (getX()<120 && getY()>120)
-        {
+        } else if ( x < 120 && y > 120) {
             //Stuk onder raam vermijden 
             setRotation(-additionalAngle);
-        }
-        if (getX()<135 && getY()>120 && getY()<674)
-        {
+        } else if (x < 135 && y > 120 && y < 674) {
             //Niet voorbij de linkermuur
             setRotation(90 -additionalAngle);
-        }
-        if (getX()>138 && getX()<652 && getY()>255 && getY()<265)
-        {
-            //Niet voorbij het bovenste stuk van de middelste muur 
-            //in het huis
+        } else if (x > 138 && x < 652 && y > 255 && y < 265) {
+            //Niet voorbij het bovenste stuk van de middelste muur
             setRotation(-additionalAngle);
-        }
-        if (getX()>138 && getX()<652 && getY()>265 && getY()<285)
-        {
-            //Niet voorbij het onderste stuk van de middelste muur 
-            //in het huis
+        } else if (x > 138 && x < 652 && y > 265 && y < 285) {
+            //Niet voorbij het onderste stuk van de middelste muur
             setRotation(additionalAngle);
-        }
-        if (getX()>651 && getX()<652 && getY()>255 && getY()<275)
-        {
-            //Niet voorbij het rechtse stuk van de middelste muur 
-            //in het huis
+        } else if (x > 651 && x < 652 && y > 255 && y < 275) {
+            //Niet voorbij het rechtse stuk van de middelste muur
             setRotation(90-additionalAngle);
         }
     }
@@ -116,7 +103,6 @@ public class Fly extends Creature
             return false;
 
         }
-
     }
 
     public void stop() {
@@ -131,6 +117,7 @@ public class Fly extends Creature
 
 enum Colors {
     GRAY_WALL,
+
     // possible other colors for detecting fruit in the future
 
     BlUE,
@@ -139,4 +126,3 @@ enum Colors {
     GREEN,
 
 }
-
