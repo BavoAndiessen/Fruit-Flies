@@ -26,7 +26,7 @@ public class MyWorld extends World
         addObject (FruitDisplay, 503, 660);
 
         Vliegenmepper Vliegenmepper = new Vliegenmepper();
-        addObject (Vliegenmepper, 100, 100);
+        addObject (Vliegenmepper, 645, 465);
 
         Spray Spray = new Spray();
         addObject(Spray, 930, 80);
