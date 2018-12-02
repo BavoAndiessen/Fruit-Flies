@@ -65,7 +65,7 @@ public class Fly extends Creature
     public Fly(boolean male, boolean fertile) {
 
         map = new GreenfootImage("grondplan.PNG");
-        setRotation(Greenfoot.getRandomNumber(360));
+        setRotation(45- Greenfoot.getRandomNumber(90));
 
         this.fertile = fertile;
 
