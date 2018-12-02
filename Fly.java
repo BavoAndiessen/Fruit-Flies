@@ -1,4 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.List;
+import java.util.Collections;
 
 /**
  * Write a description of class Fly here.
@@ -8,7 +10,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Fly extends Creature
 {
-    boolean male;
+    public boolean male;
+    public boolean fertile = true;
     int speed = 8; // + MyWorld.lvl*3 (telt het level maal 3 op bij de snelheid van de vlieg)
 
     final int RECHTERMUUR = 1078;
@@ -27,9 +30,37 @@ public class Fly extends Creature
             setRotation(currentRotation + randomAngle);
 
         }
-        
-        
+        // small random movements
+        int angle = Greenfoot.getRandomNumber(7);
+        if (!eatingFruit()) {
+            setRotation(getRotation() - 3 + angle);
+        }
+
+        if (fertile) {
+            if (touchingFlyOfOtherGender()) {
+                System.out.println("success");
+                int genderOfNewBabyFly = Greenfoot.getRandomNumber(1);
+
+                int numberOfBabyFlies = 0;
+                while(numberOfBabyFlies < 8) {
+                    if (genderOfNewBabyFly == 1) { 
+                        getWorld().addObject(new Fly(true), getX(), getY());
+                    } else {
+                        getWorld().addObject(new Fly(false), getX(), getY());
+                    }
+                    numberOfBabyFlies++;
+                }
+                fertile = false;
+
+            }
+            
+        }
+
     }   
+
+    private boolean eatingFruit() {
+        return (getOneIntersectingObject(Fruit.class) != null);
+    }
 
     public Fly(boolean male) {
 
@@ -61,7 +92,6 @@ public class Fly extends Creature
         int additionalAngle = Greenfoot.getRandomNumber(180);
         int x = getX();
         int y = getY();
-        
 
         if (x > RECHTERMUUR) {
             setRotation(90 + additionalAngle);
@@ -85,6 +115,19 @@ public class Fly extends Creature
             //Niet voorbij het rechtse stuk van de middelste muur
             setRotation(90-additionalAngle);
         }
+    }
+
+    public boolean touchingFlyOfOtherGender() {
+        Fly fly = (Fly) getOneIntersectingObject(Fly.class);
+
+        boolean oppositeGender = !male;
+        if (fly != null) {
+            if (fly.eatingFruit() && fly.male != oppositeGender) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     public boolean atColor(Colors colorToLookFor) {
@@ -114,7 +157,6 @@ public class Fly extends Creature
         speed = 8;
     }
 }
-
 
 enum Colors {
     GRAY_WALL,
