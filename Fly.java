@@ -48,7 +48,6 @@ public class Fly extends Creature
                     getWorld().addObject(new Fly(false, false), getX(), getY());
                 }
                 numberOfBabyFlies++;
-                System.out.println("success");
 
                 fertile = false;
 
