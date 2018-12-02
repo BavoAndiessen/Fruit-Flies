@@ -11,7 +11,7 @@ import java.util.Collections;
 public class Fly extends Creature
 {
     public boolean male;
-    public boolean fertile = true;
+    public boolean fertile;
     int speed = 8; // + MyWorld.lvl*3 (telt het level maal 3 op bij de snelheid van de vlieg)
 
     final int RECHTERMUUR = 1078;
@@ -38,22 +38,22 @@ public class Fly extends Creature
 
         if (fertile) {
             if (touchingFlyOfOtherGender()) {
-                System.out.println("success");
                 int genderOfNewBabyFly = Greenfoot.getRandomNumber(1);
 
                 int numberOfBabyFlies = 0;
-                while(numberOfBabyFlies < 8) {
-                    if (genderOfNewBabyFly == 1) { 
-                        getWorld().addObject(new Fly(true), getX(), getY());
-                    } else {
-                        getWorld().addObject(new Fly(false), getX(), getY());
-                    }
-                    numberOfBabyFlies++;
+
+                if (genderOfNewBabyFly == 1) { 
+                    getWorld().addObject(new Fly(true, false), getX(), getY());
+                } else {
+                    getWorld().addObject(new Fly(false, false), getX(), getY());
                 }
+                numberOfBabyFlies++;
+                System.out.println("success");
+
                 fertile = false;
 
             }
-            
+
         }
 
     }   
@@ -62,10 +62,12 @@ public class Fly extends Creature
         return (getOneIntersectingObject(Fruit.class) != null);
     }
 
-    public Fly(boolean male) {
+    public Fly(boolean male, boolean fertile) {
 
         map = new GreenfootImage("grondplan.PNG");
         setRotation(Greenfoot.getRandomNumber(360));
+
+        this.fertile = fertile;
 
         // determine gender
         if (male) {
@@ -168,4 +170,4 @@ enum Colors {
     YELLOW,
     GREEN,
 
-}
+    }
