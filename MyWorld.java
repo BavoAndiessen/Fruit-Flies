@@ -113,14 +113,14 @@ public class MyWorld extends World
 
             if (geslacht == 1)
             {
-                Fly fly = new Fly(true);
+                Fly fly = new Fly(true, true);
                 addObject(fly,30,74);
                 FlyCount++;
             }
 
             if (geslacht == 2)
             {
-                Fly fly = new Fly(false);
+                Fly fly = new Fly(false, true);
                 addObject(fly,30,74);
                 FlyCount++;
             }
