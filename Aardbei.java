@@ -1,5 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.*;
 /**
  * Write a description of class Appel here.
  * 
@@ -18,12 +18,9 @@ public class Aardbei extends Fruit
     public int Timer = 0;
     public Aardbei() 
     {
-        aardbei = new GreenfootImage("aardbei_transparant.png");
-        aardbei.scale(112,90);
-        aardbeif1 = new GreenfootImage("aardbei_transparant 1.png");
-        aardbeif1.scale(112,90);
-        aardbeif2 = new GreenfootImage("aardbei_transparant 2.png");
-        aardbeif2.scale(112,90);
+        aardbei = new GreenfootImage("aardbei_transparant.png");    
+        aardbeif1 = new GreenfootImage("aardbei_transparant 1.png");        
+        aardbeif2 = new GreenfootImage("aardbei_transparant 2.png");        
         setImage (aardbei);
         // Add your action code here.
     }   
@@ -31,9 +28,13 @@ public class Aardbei extends Fruit
     public void act()
     {
         Fly fly = (Fly) getOneIntersectingObject(Fly.class);
+        List<Fly> flies = getIntersectingObjects(Fly.class);
         if (fly != null)
         {
-            fly.stop();
+            for(Fly vlieg : flies)
+            {
+                vlieg.stop();
+            }            
             Timer ++;
             if (Timer == 1)
             { 
@@ -52,5 +53,6 @@ public class Aardbei extends Fruit
                 getWorld().removeObject(this);
             }
         }
-    }   
-}
+    }
+}   
+
