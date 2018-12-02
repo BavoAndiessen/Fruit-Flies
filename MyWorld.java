@@ -94,6 +94,7 @@ public class MyWorld extends World
               Score = 0;
               lvl++;
               FlyCount = 0;
+              FruitCount = 0;
           }
     }
         
