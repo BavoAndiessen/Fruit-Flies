@@ -1,5 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.*;
 /**
  * Write a description of class Appel here.
  * 
@@ -18,12 +18,9 @@ public class Banaan extends Fruit
     public int Timer = 0;
     public Banaan() 
     {
-        banaan = new GreenfootImage("bannaan_transparant.png");
-        banaan.scale(112,90);
-        banaanf1 = new GreenfootImage("bannaan_transparant 1.png");
-        banaanf1.scale(112,90);
-        banaanf2 = new GreenfootImage("bannaan_transparant 2.png");
-        banaanf2.scale(112,90);
+        banaan = new GreenfootImage("bannaan_transparant.png");        
+        banaanf1 = new GreenfootImage("bannaan_transparant 1.png");        
+        banaanf2 = new GreenfootImage("bannaan_transparant 2.png");        
         setImage (banaan);
         // Add your action code here.
     }   
@@ -31,9 +28,13 @@ public class Banaan extends Fruit
     public void act()
     {
         Fly fly = (Fly) getOneIntersectingObject(Fly.class);
+        List<Fly> flies = getIntersectingObjects(Fly.class);
         if (fly != null)
         {
-            fly.stop();
+            for(Fly vlieg : flies)
+            {
+                vlieg.stop();
+            }        
             Timer ++;
             if (Timer == 1)
             { 
