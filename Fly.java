@@ -1,173 +1,137 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.List;
-import java.util.Collections;
 
-/**
- * Write a description of class Fly here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
-public class Fly extends Creature
-{
-    public boolean male;
-    public boolean fertile;
-    int speed = 5 + lvl;
+public class MyWorld extends World
+{  
+    public static int FlyCount = 0; //het is niet de bedoeling dat deze int verandert wanneer een vlieg dood gaat
+    public static int FruitCount = 0;
+    public static int FlyCountDisplay = 0;
+    public static int lvl = 1;
+    public static int Score = 0;
+    private int timer = 8001;
+    public static int EindScore;
+    
+    Label FlyDisplay = new Label("Aantal vliegen: 0");
+    Label Scorebord = new Label("Dode vliegen: 0");
+    Label Level = new Label("Level: 1");
+    Label TimerDisplay = new Label("Time left: 0");
+    
+    public MyWorld()
+    {    
+        super(1159, 674, 1); 
 
-    final int RECHTERMUUR = 1078;
-    final int BOVENMUUR = 33;
-    final int ONDERMUUR = 575;
+        GreenfootImage grondplan = new GreenfootImage("grondplan.PNG");
+        setBackground(grondplan); 
+        
+        addObject (FlyDisplay,500, 600);
+        addObject (Scorebord,499, 620);
+        addObject (Level, 502, 640);
+        addObject (TimerDisplay, 503, 660);
+        
+        Vliegenmepper Vliegenmepper = new Vliegenmepper();
+        addObject (Vliegenmepper, 100, 100);
+        
+        Spray Spray = new Spray();
+        addObject(Spray, 930, 80);
 
-    public void act() {
+        act();
+    }
 
-        checkWindows();
-        move(speed);
-        if (atWorldsEnd()) {
-            setRotation(Greenfoot.getRandomNumber(360));
-        } else if (atColor(Colors.GRAY_WALL)) {
-            int currentRotation = getRotation();
-            int randomAngle = Greenfoot.getRandomNumber(180);
-            setRotation(currentRotation + randomAngle);
+    public void act()
+    { 
 
+        timer--;
+
+        
+        if (timer == 0) 
+        {
+            Scorebord Scorebord = new Scorebord();
+            addObject (Scorebord, getWidth() / 2, getHeight() / 2);
+            Greenfoot.stop();
         }
-        // small random movements
-        int angle = Greenfoot.getRandomNumber(7);
-        if (!eatingFruit()) {
-            setRotation(getRotation() - 3 + angle);
-        }
+        SpawnVlieg();
+        labels();
+        spawnFruit();  
+    }
+        
+    public void spawnFruit()
+    {
+        int kansNewFruit = Greenfoot.getRandomNumber(5000);
+          
+          if (kansNewFruit < 10 && FruitCount < 4)
+          {
+              int fruitsoort = Greenfoot.getRandomNumber(6);
+              
+                  int[] fruitSpawnX = {550, 440, 850, 920, 190, 1020, 190}; //vooraf bepaalde coördinaten van logische 'fruitplaatsen'
+                  int[] fruitSpawnY = {230, 380, 500, 440, 350, 420, 120};
 
-        if (fertile) {
-            if (touchingFlyOfOtherGender()) {
-                int genderOfNewBabyFly = Greenfoot.getRandomNumber(1);
+              switch (fruitsoort) {
+                 case 1:
+                    Aardbei Aardbei = new Aardbei();
+                    addObject (Aardbei, fruitSpawnX[FruitCount], fruitSpawnY[FruitCount]);
 
-                int numberOfBabyFlies = 0;
+                 case 2:
+                    Appel Appel = new Appel();
+                    addObject (Appel, fruitSpawnX[FruitCount], fruitSpawnY[FruitCount]);
 
-                if (genderOfNewBabyFly == 1) { 
-                    getWorld().addObject(new Fly(true, false), getX(), getY());
-                } else {
-                    getWorld().addObject(new Fly(false, false), getX(), getY());
+                 case 3:
+                    Banaan Banaan = new Banaan();
+                    addObject (Banaan, fruitSpawnX[FruitCount], fruitSpawnY[FruitCount]);
+
+                 case 4:
+                    Kers Kers = new Kers();
+                    addObject (Kers, fruitSpawnX[FruitCount], fruitSpawnY[FruitCount]);
+
+                 case 5:
+                    Peer Peer = new Peer();
+                    addObject (Peer, fruitSpawnX[FruitCount], fruitSpawnY[FruitCount]);
+              }
+                            
+              FruitCount++;
+              
+              //if statement voor elke fruitsoort net zoals bij de vliegen
+          }
+    }
+        
+    public void labels()
+    {
+        FlyDisplay.setText("Aantal vliegen: "+ FlyCountDisplay);
+        Scorebord.setText("Dode vliegen: " + Score); //+ score vanuit Spray/mepper klasse
+        Level.setText("Level: " + lvl);
+        TimerDisplay.setText("Time Left: " + timer);
+          
+          if (Score == 20)
+          {
+              Score = 0;
+              lvl++;
+              FlyCount = 0;
+          }
+    }
+        
+    public void SpawnVlieg()
+    {
+        int kansNewFly = Greenfoot.getRandomNumber(1000);
+          
+          if (kansNewFly < 10 && FlyCount < 20)
+          {
+                int geslacht = Greenfoot.getRandomNumber(3);
+
+                if (geslacht == 1)
+                {
+                    Fly fly = new Fly(true, true);
+                    addObject(fly,30,74);
+                    FlyCount++;
+                    FlyCountDisplay++;
                 }
-                numberOfBabyFlies++;
-                MyWorld.FlyCountDisplay++;
 
-                fertile = false;
-
+                if (geslacht == 2)
+                {
+                    Fly fly = new Fly(false, true);
+                    addObject(fly,30,74);
+                    FlyCount++;
+                    FlyCountDisplay++;
+                }
+            
             }
-
-        }
-
-    }   
-
-    private boolean eatingFruit() {
-        return (getOneIntersectingObject(Fruit.class) != null);
-    }
-
-    public Fly(boolean male, boolean fertile) {
-
-        map = new GreenfootImage("grondplan.PNG");
-        setRotation(45- Greenfoot.getRandomNumber(90));
-
-        this.fertile = fertile;
-
-        // determine gender
-        if (male) {
-            setImage("maleFly25.png");
-        } else {
-            setImage("femaleFly35.png");
-        }
-    }
-
-    public boolean atWorldsEnd() {
-        if (getX() < 3 || getX() > getWorld().getWidth() - 3) {
-            return true;
-        }
-        if (getY() < 3 || getY() > getWorld().getHeight() - 3) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    // Vragen aan mevr. Brouns wat hier de beste werkwijze is
-    public void checkWindows() {
-
-        int additionalAngle = Greenfoot.getRandomNumber(180);
-        int x = getX();
-        int y = getY();
-
-        if (x > RECHTERMUUR) {
-            setRotation(90 + additionalAngle);
-        } else if (y < BOVENMUUR) {
-            setRotation(additionalAngle);
-        } else if (y > ONDERMUUR) {
-            setRotation(-additionalAngle);
-        } else if ( x < 120 && y > 120) {
-            //Stuk onder raam vermijden 
-            setRotation(-additionalAngle);
-        } else if (x < 135 && y > 120 && y < 674) {
-            //Niet voorbij de linkermuur
-            setRotation(90 -additionalAngle);
-        } else if (x > 138 && x < 652 && y > 255 && y < 265) {
-            //Niet voorbij het bovenste stuk van de middelste muur
-            setRotation(-additionalAngle);
-        } else if (x > 138 && x < 652 && y > 265 && y < 285) {
-            //Niet voorbij het onderste stuk van de middelste muur
-            setRotation(additionalAngle);
-        } else if (x > 651 && x < 652 && y > 255 && y < 275) {
-            //Niet voorbij het rechtse stuk van de middelste muur
-            setRotation(90-additionalAngle);
-        }
-    }
-
-    public boolean touchingFlyOfOtherGender() {
-        Fly fly = (Fly) getOneIntersectingObject(Fly.class);
-
-        boolean oppositeGender = !male;
-        if (fly != null) {
-            if (fly.eatingFruit() && fly.male != oppositeGender) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    public boolean atColor(Colors colorToLookFor) {
-
-        Color currentColor = map.getColorAt(this.getX(), this.getY());
-
-        speed = 8;
-
-        int red = currentColor.getRed();
-        int green = currentColor.getGreen();
-        int blue = currentColor.getBlue();
-
-        switch (colorToLookFor) {
-            case GRAY_WALL:
-            return (red == 128 && green == 128 && blue == 128);
-            default:
-            return false;
-
-        }
-    }
-
-    public void stop() {
-        speed = 0;
-    }
-
-    public void start() {
-        speed = 8;
     }
 }
-
-enum Colors {
-    GRAY_WALL,
-
-    // possible other colors for detecting fruit in the future
-
-    BlUE,
-    RED,
-    YELLOW,
-    GREEN,
-
-    }
