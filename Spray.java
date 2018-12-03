@@ -62,6 +62,7 @@ public class Spray extends Actor
         {
             removeTouching(Fly.class);
             MyWorld.Score++;
+            MyWorld.FlyCountDisplay = MyWorld.FlyCountDisplay - 1;
         }
 }
 }
