@@ -7,6 +7,7 @@ public class MyWorld extends World
     public static int FlyCountDisplay = 0;
     public static int lvl = 1;
     public static int Score = 0;
+    private int timer = 5000;
     
     Label FlyDisplay = new Label("Aantal vliegen: 0");
     Label Scorebord = new Label("Score: 0");
@@ -36,6 +37,11 @@ public class MyWorld extends World
 
     public void act()
     { 
+        timer--;
+        if (timer < 0) {
+            Greenfoot.stop();
+            // hier het scorebord
+        }
         SpawnVlieg();
         labels();
         spawnFruit();  
