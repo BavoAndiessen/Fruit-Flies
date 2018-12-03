@@ -1,4 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import java.util.List;
 
 public class MyWorld extends World
 {  
@@ -7,12 +8,13 @@ public class MyWorld extends World
     public static int FlyCountDisplay = 0;
     public static int lvl = 1;
     public static int Score = 0;
-    private int timer = 5000;
+    private int timer = 8001;
+    public static int EindScore;
     
     Label FlyDisplay = new Label("Aantal vliegen: 0");
-    Label Scorebord = new Label("Score: 0");
+    Label Scorebord = new Label("Dode vliegen: 0");
     Label Level = new Label("Level: 1");
-    Label FruitDisplay = new Label("Fruit: 0");
+    Label TimerDisplay = new Label("Time left: 0");
     
     public MyWorld()
     {    
@@ -24,7 +26,7 @@ public class MyWorld extends World
         addObject (FlyDisplay,500, 600);
         addObject (Scorebord,499, 620);
         addObject (Level, 502, 640);
-        addObject (FruitDisplay, 503, 660);
+        addObject (TimerDisplay, 503, 660);
         
         Vliegenmepper Vliegenmepper = new Vliegenmepper();
         addObject (Vliegenmepper, 100, 100);
@@ -37,10 +39,15 @@ public class MyWorld extends World
 
     public void act()
     { 
+
         timer--;
-        if (timer < 0) {
+
+        
+        if (timer == 0) 
+        {
+            Scorebord Scorebord = new Scorebord();
+            addObject (Scorebord, getWidth() / 2, getHeight() / 2);
             Greenfoot.stop();
-            // hier het scorebord
         }
         SpawnVlieg();
         labels();
@@ -59,25 +66,25 @@ public class MyWorld extends World
                   int[] fruitSpawnY = {230, 380, 500, 440, 350, 420, 120};
 
               switch (fruitsoort) {
-              	 case 1:
-              		Aardbei Aardbei = new Aardbei();
-                  	addObject (Aardbei, fruitSpawnX[FruitCount], fruitSpawnY[FruitCount]);
+                 case 1:
+                    Aardbei Aardbei = new Aardbei();
+                    addObject (Aardbei, fruitSpawnX[FruitCount], fruitSpawnY[FruitCount]);
 
                  case 2:
-                 	Appel Appel = new Appel();
-                  	addObject (Appel, fruitSpawnX[FruitCount], fruitSpawnY[FruitCount]);
+                    Appel Appel = new Appel();
+                    addObject (Appel, fruitSpawnX[FruitCount], fruitSpawnY[FruitCount]);
 
                  case 3:
-                 	Banaan Banaan = new Banaan();
-                  	addObject (Banaan, fruitSpawnX[FruitCount], fruitSpawnY[FruitCount]);
+                    Banaan Banaan = new Banaan();
+                    addObject (Banaan, fruitSpawnX[FruitCount], fruitSpawnY[FruitCount]);
 
                  case 4:
-                 	Kers Kers = new Kers();
-                  	addObject (Kers, fruitSpawnX[FruitCount], fruitSpawnY[FruitCount]);
+                    Kers Kers = new Kers();
+                    addObject (Kers, fruitSpawnX[FruitCount], fruitSpawnY[FruitCount]);
 
                  case 5:
-                 	Peer Peer = new Peer();
-                  	addObject (Peer, fruitSpawnX[FruitCount], fruitSpawnY[FruitCount]);
+                    Peer Peer = new Peer();
+                    addObject (Peer, fruitSpawnX[FruitCount], fruitSpawnY[FruitCount]);
               }
                             
               FruitCount++;
@@ -89,9 +96,9 @@ public class MyWorld extends World
     public void labels()
     {
         FlyDisplay.setText("Aantal vliegen: "+ FlyCountDisplay);
-        Scorebord.setText("Score: " + Score); //+ score vanuit Spray/mepper klasse
+        Scorebord.setText("Dode vliegen: " + Score); //+ score vanuit Spray/mepper klasse
         Level.setText("Level: " + lvl);
-        FruitDisplay.setText("Fruit: " + FruitCount);
+        TimerDisplay.setText("Time Left: " + timer);
           
           if (Score == 20)
           {
@@ -111,7 +118,7 @@ public class MyWorld extends World
 
                 if (geslacht == 1)
                 {
-                    Fly fly = new Fly(true);
+                    Fly fly = new Fly(true, true);
                     addObject(fly,30,74);
                     FlyCount++;
                     FlyCountDisplay++;
@@ -119,7 +126,7 @@ public class MyWorld extends World
 
                 if (geslacht == 2)
                 {
-                    Fly fly = new Fly(false);
+                    Fly fly = new Fly(false, true);
                     addObject(fly,30,74);
                     FlyCount++;
                     FlyCountDisplay++;
