@@ -12,7 +12,7 @@ public class Fly extends Creature
 {
     public boolean male;
     public boolean fertile;
-    int speed = 8; // + MyWorld.lvl*3 (telt het level maal 3 op bij de snelheid van de vlieg)
+    int speed = 5 + lvl;
 
     final int RECHTERMUUR = 1078;
     final int BOVENMUUR = 33;
