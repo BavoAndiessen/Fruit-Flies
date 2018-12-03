@@ -2,12 +2,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 public class MyWorld extends World
 {  
-    public int FlyCount = 0; //het is niet de bedoeling dat deze int verandert wanneer een vlieg dood gaat
-    public int FruitCount = 0;
-    public int FlyCountDisplay = 0;
+    public static int FlyCount = 0; //het is niet de bedoeling dat deze int verandert wanneer een vlieg dood gaat
+    public static int FruitCount = 0;
+    public static int FlyCountDisplay = 0;
     public static int lvl = 1;
     public static int Score = 0;
-    private int timer = 5000;
     
     Label FlyDisplay = new Label("Aantal vliegen: 0");
     Label Scorebord = new Label("Score: 0");
@@ -37,11 +36,6 @@ public class MyWorld extends World
 
     public void act()
     { 
-        timer--;
-        if (timer < 0) {
-            Greenfoot.stop();
-            
-        }
         SpawnVlieg();
         labels();
         spawnFruit();  
@@ -92,8 +86,6 @@ public class MyWorld extends World
         Scorebord.setText("Score: " + Score); //+ score vanuit Spray/mepper klasse
         Level.setText("Level: " + lvl);
         FruitDisplay.setText("Fruit: " + FruitCount);
-        
-        FlyCountDisplay = FlyCount - Score;
           
           if (Score == 20)
           {
@@ -116,6 +108,7 @@ public class MyWorld extends World
                     Fly fly = new Fly(true);
                     addObject(fly,30,74);
                     FlyCount++;
+                    FlyCountDisplay++;
                 }
 
                 if (geslacht == 2)
@@ -123,6 +116,7 @@ public class MyWorld extends World
                     Fly fly = new Fly(false);
                     addObject(fly,30,74);
                     FlyCount++;
+                    FlyCountDisplay++;
                 }
             
             }
