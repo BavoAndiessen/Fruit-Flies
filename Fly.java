@@ -48,6 +48,7 @@ public class Fly extends Creature
                     getWorld().addObject(new Fly(false, false), getX(), getY());
                 }
                 numberOfBabyFlies++;
+                MyWorld.FlyCountDisplay++;
 
                 fertile = false;
 
