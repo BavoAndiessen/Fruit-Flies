@@ -11,6 +11,8 @@ public class Vliegenmepper extends Actor
     private GreenfootImage image1;
     private GreenfootImage image2;
     public int pauze = 0;
+    
+    public static int EindScore;
 
     public Vliegenmepper()
     {
@@ -63,6 +65,7 @@ public class Vliegenmepper extends Actor
             removeTouching(Fly.class);  
             MyWorld.Score++;
             MyWorld.FlyCountDisplay = MyWorld.FlyCountDisplay - 1;
+            EindScore++;
         }
     }
 }
