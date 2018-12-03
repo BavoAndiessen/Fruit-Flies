@@ -1,20 +1,20 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
-/**
- * Write a description of class Scorebord here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
- */
 public class Scorebord extends Actor
 {
-    /**
-     * Act - do whatever the Scorebord wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+    private GreenfootImage scorebord;
+    
     public void act() 
     {
-        GreenfootImage scorebord = new GreenfootImage("scorebord.JPG");
+        scorebord = new GreenfootImage("scorebord.jpg");
         setImage(scorebord);
+        
+        getWorld().showText(Integer.toString(MyWorld.EindScore), 610, 277);
+        getWorld().showText(Integer.toString(MyWorld.lvl), 610, 312);
+        
+        if (Greenfoot.mouseClicked(this))
+        {
+            getWorld().removeObject(this);
+        }
     }    
 }
